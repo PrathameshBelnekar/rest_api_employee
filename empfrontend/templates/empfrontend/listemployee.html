@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>List Employee</title>
+    <link rel="stylesheet" href="{% static 'empfrontend/css/style.css' %}">
+</head>
+<body>
+
+<style>
+    body {
+        display: flex;
+
+        margin: 0;
+    }
+
+    table, th, td {
+        border: 1px solid black;
+      }
+    
+    .container {
+          background-color: lightblue;
+          max-width: 80%;
+          margin: auto;
+          padding: 30px;
+          margin-top : 160px;
+          margin-left : 490px;
+          border: 0.5px solid black;
+          margin-top : 120px;
+    
+      }
+
+</style>
+
+<div>
+<div>
+<ul>
+    <li>
+    <a href="{% url 'add-employee' %}">Add Employee </a>
+   
+</li>
+</br>
+<li>
+   <a href="{%url 'delete-inactive'%}">Delete Inactive Employees </a>
+</li>
+</br>
+<li>
+   <a href="{%url 'update-salary'%}">Update salary of employees completed 1 year</a> 
+</li>
+</br>
+</ul>
+</div>
+
+    <div class = container >
+        <table>
+        <tr>
+            <th>Employee Name</th>
+            <th>Joining Date </th>
+            <th>Salary</th>
+            <th>Status</th>
+            <th>Edit</th>
+            <th>Change Status</th>
+          </tr>
+          {% if emp_data %}
+          {% for employee in emp_data %}
+          <tr>
+            <td>{{ employee.emp_name}}</td>
+            <td>{{ employee.joining_date}}</td>
+            <td>{{ employee.salary}}</td>
+            <td>{{ employee.status}}</td>
+            <td><a href="{% url 'update-employee' employee.id %}">Edit</a></td>
+            <td><a href="{% url 'update-status' employee.id %}">{{employee.status}}</a></td>
+          </tr>
+          {% endfor %}
+
+          {% endif %}
+
+        </table>
+    </div>
+     
+</div>
+</body>
+</html>
+
+
